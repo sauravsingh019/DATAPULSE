@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-apple-bg text-apple-text;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-apple-border rounded-full; }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-apple-lg shadow-apple border border-apple-border/50;
+  }
+
+  .card-lg {
+    @apply bg-white rounded-apple-xl shadow-apple-md border border-apple-border/50;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-apple font-medium text-sm transition-all duration-200 select-none cursor-pointer;
+  }
+
+  .btn-primary {
+    @apply btn bg-apple-blue text-white hover:bg-apple-blueDark active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply btn bg-apple-bg text-apple-text border border-apple-border hover:bg-white active:scale-95;
+  }
+
+  .btn-danger {
+    @apply btn bg-apple-red text-white hover:opacity-90 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply btn text-apple-secondary hover:bg-apple-bg active:scale-95;
+  }
+
+  .input {
+    @apply w-full px-4 py-2.5 rounded-apple border border-apple-border bg-white text-apple-text placeholder:text-apple-gray focus:outline-none focus:ring-2 focus:ring-apple-blue/30 focus:border-apple-blue transition-all;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-apple-secondary mb-1.5;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-blue { @apply badge bg-blue-50 text-blue-700; }
+  .badge-green { @apply badge bg-green-50 text-green-700; }
+  .badge-orange { @apply badge bg-orange-50 text-orange-700; }
+  .badge-red { @apply badge bg-red-50 text-red-700; }
+  .badge-gray { @apply badge bg-gray-100 text-gray-600; }
+
+  .stat-card {
+    @apply card p-5;
+  }
+
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-apple text-sm font-medium text-apple-secondary hover:bg-apple-bg hover:text-apple-text transition-all cursor-pointer;
+  }
+
+  .nav-item-active {
+    @apply nav-item bg-apple-blue/10 text-apple-blue;
+  }
+
+  .section-title {
+    @apply text-2xl font-semibold tracking-tight text-apple-text;
+  }
+
+  .page-header {
+    @apply mb-8;
+  }
+}
