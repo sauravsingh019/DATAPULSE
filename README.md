@@ -3,8 +3,6 @@
 > A powerful full-stack data analytics and survey platform designed for modern teams.
 
 🌐 **Live App**: https://datapulse-delta.vercel.app
-🔧 **Backend API**: https://datapulse-backend-72jz.onrender.com
-📁 **GitHub Repository**: https://github.com/sauravsingh019/DATAPULSE
 
 ---
 
@@ -171,15 +169,6 @@ DataPulse/
 ├── .gitignore
 └── README.md
 ```
-
----
-
-## 👨‍💻 Author
-
-**Saurav Singh**
-GitHub: https://github.com/sauravsingh019
-
----
 
 ## 📄 License
 
