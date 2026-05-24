@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -16,11 +17,11 @@ export default {
           red: '#ff3b30',
           purple: '#af52de',
           gray: '#8e8e93',
-          bg: '#f5f5f7',
-          surface: '#ffffff',
-          border: '#d2d2d7',
-          text: '#1d1d1f',
-          secondary: '#6e6e73',
+          bg: 'var(--apple-bg)',
+          surface: 'var(--apple-surface)',
+          border: 'var(--apple-border)',
+          text: 'var(--apple-text)',
+          secondary: 'var(--apple-secondary)',
         },
       },
       borderRadius: {

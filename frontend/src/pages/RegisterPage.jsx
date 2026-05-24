@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../stores/authStore'
 import { Zap } from 'lucide-react'
@@ -6,15 +6,20 @@ import { motion } from 'framer-motion'
 
 export default function RegisterPage() {
   const [form, setForm] = useState({ name: '', email: '', password: '' })
-  const { register, loading, error, clearError } = useAuthStore()
+  const { register, loading, error, clearError, token } = useAuthStore()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (token) navigate('/dashboard', { replace: true })
+  }, [token, navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     clearError()
     const ok = await register(form.name, form.email, form.password)
-    if (ok) navigate('/')
+    if (ok) navigate('/dashboard')
   }
+
 
   return (
     <div className="min-h-screen bg-apple-bg flex items-center justify-center p-4">

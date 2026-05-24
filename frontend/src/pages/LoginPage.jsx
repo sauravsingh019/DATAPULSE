@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuthStore } from '../stores/authStore'
 import { Eye, EyeOff, Zap } from 'lucide-react'
@@ -7,15 +7,20 @@ import { motion } from 'framer-motion'
 export default function LoginPage() {
   const [form, setForm] = useState({ email: '', password: '' })
   const [showPw, setShowPw] = useState(false)
-  const { login, loading, error, clearError } = useAuthStore()
+  const { login, loading, error, clearError, token } = useAuthStore()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (token) navigate('/dashboard', { replace: true })
+  }, [token, navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     clearError()
     const ok = await login(form.email, form.password)
-    if (ok) navigate('/')
+    if (ok) navigate('/dashboard')
   }
+
 
   return (
     <div className="min-h-screen bg-apple-bg flex items-center justify-center p-4">

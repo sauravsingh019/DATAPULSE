@@ -1,13 +1,15 @@
 import { Outlet, useNavigate, useLocation, Link } from 'react-router-dom'
 import { useAuthStore } from '../stores/authStore'
+import BackgroundPulse from './BackgroundPulse'
 import {
   LayoutDashboard, ClipboardList, Database, BarChart3,
   LogOut, ChevronRight, Plus, User, Zap
 } from 'lucide-react'
 import { motion } from 'framer-motion'
 
+
 const nav = [
-  { label: 'Overview', path: '/', icon: LayoutDashboard },
+  { label: 'Overview', path: '/dashboard', icon: LayoutDashboard },
   { label: 'Surveys', path: '/surveys', icon: ClipboardList },
   { label: 'Datasets', path: '/datasets', icon: Database },
   { label: 'Dashboards', path: '/dashboards', icon: BarChart3 },
@@ -19,9 +21,12 @@ export default function Layout() {
   const navigate = useNavigate()
 
   return (
-    <div className="flex h-screen overflow-hidden bg-apple-bg">
+    <div className="relative flex h-screen overflow-hidden bg-apple-bg">
+      {/* Dynamic Background signal grid for logged-in panel */}
+      <BackgroundPulse mode="grid" speed={0.4} color="#0071e3" density={15} />
+
       {/* Sidebar */}
-      <aside className="w-60 flex-shrink-0 bg-white border-r border-apple-border/60 flex flex-col">
+      <aside className="relative z-10 w-60 flex-shrink-0 bg-apple-surface border-r border-apple-border/60 flex flex-col">
         {/* Brand */}
         <div className="px-5 py-5 border-b border-apple-border/50">
           <div className="flex items-center gap-2.5">
@@ -38,7 +43,7 @@ export default function Layout() {
         {/* Navigation */}
         <nav className="flex-1 px-3 py-4 space-y-0.5">
           {nav.map(({ label, path, icon: Icon }) => {
-            const active = path === '/' ? location.pathname === '/' : location.pathname.startsWith(path)
+            const active = path === '/dashboard' ? location.pathname === '/dashboard' : location.pathname.startsWith(path)
             return (
               <Link key={path} to={path}
                 className={active ? 'nav-item-active' : 'nav-item'}
@@ -70,8 +75,8 @@ export default function Layout() {
               <p className="text-sm font-medium text-apple-text truncate">{user?.name}</p>
               <p className="text-xs text-apple-gray truncate">{user?.role}</p>
             </div>
-            <button onClick={logout} title="Logout"
-              className="text-apple-gray hover:text-apple-red transition-colors">
+            <button onClick={() => { navigate('/'); logout(); }} title="Logout"
+              className="text-apple-gray hover:text-apple-red transition-colors cursor-pointer">
               <LogOut className="w-4 h-4" />
             </button>
           </div>
@@ -79,7 +84,7 @@ export default function Layout() {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 overflow-y-auto">
+      <main className="relative z-10 flex-1 overflow-y-auto">
         <motion.div
           key={location.pathname}
           initial={{ opacity: 0, y: 8 }}
