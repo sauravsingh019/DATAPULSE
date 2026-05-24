@@ -29,12 +29,13 @@ app.get('/api/health', (req, res) => res.json({ status: 'ok', name: 'DataPulse A
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/datapulse'
 
-mongoose.connect(MONGO_URI)
-  .then(() => {
-    console.log('✅ MongoDB connected')
-    app.listen(PORT, () => console.log(`🚀 DataPulse API running on http://localhost:${PORT}`))
-  })
-  .catch(err => {
-    console.error('❌ MongoDB connection error:', err.message)
-    process.exit(1)
-  })
+app.listen(PORT, () => {
+  console.log(`🚀 DataPulse API running on http://localhost:${PORT}`)
+  
+  mongoose.connect(MONGO_URI)
+    .then(() => console.log('✅ MongoDB connected successfully to cloud database'))
+    .catch(err => {
+      console.error('❌ MongoDB connection error:', err.message)
+      console.error('👉 Tip: Please make sure you have allowed access from anywhere (0.0.0.0/0) in MongoDB Atlas Network Access settings.')
+    })
+})
