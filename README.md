@@ -1,97 +1,152 @@
-# 📊 DataPulse — Full-Stack Analytics Platform
+# 📊 DataPulse
 
-> A comprehensive MERN-stack data analytics platform with survey builder, CSV analytics, and PowerBI-style dashboards.
+> A powerful full-stack data analytics and survey platform designed for modern teams.
+
+🌐 **Live App**: https://datapulse-delta.vercel.app
+🔧 **Backend API**: https://datapulse-backend-72jz.onrender.com
+📁 **GitHub Repository**: https://github.com/sauravsingh019/DATAPULSE
 
 ---
 
 ## ✨ Features
 
-### 🗳️ Survey Builder
-- Drag-and-drop survey creator with 10+ question types
-- Rating scales, NPS, multiple choice, checkboxes, text, date, email, yes/no
-- Shareable public links (e.g. `/s/abc123`)
-- **Kiosk Mode** — tablet-friendly, auto-reset, inactivity timer
-- Live analytics with completion rates and response distributions
+* 🔐 **Authentication**
+  Secure JWT-based user registration and login
 
-### 📁 Dataset Analytics
-- Upload CSV or JSON files (up to 50MB)
-- Auto-detect column types (number, string, date, boolean)
-- Statistical summary: min, max, mean, median, std deviation
-- Distribution histograms for numeric columns
-- Value counts & pie charts for categorical columns
-- Tabular data explorer
+* 📋 **Survey Builder**
+  Create, customize, and share surveys via public links
 
-### 📊 Dashboard Builder (PowerBI-style)
-- Drag-and-drop canvas
-- Widget types: Bar, Line, Area, Pie, Donut, KPI Card, Table, Text
-- Connect widgets to your uploaded datasets
-- Configure axes, aggregations, color themes
-- Fullscreen widget view
-- Save & share dashboards
+* 📁 **Dataset Uploads**
+  Upload CSV/JSON files and analyze data instantly
 
-### 🔐 Authentication
-- JWT-based auth with bcrypt passwords
-- Role-based access (admin, analyst, viewer)
-- Protected and public routes
+* 📊 **Dashboard Builder**
+  Build interactive dashboards with charts and widgets
+
+* 📈 **Real-time Analytics**
+  Monitor survey responses with live insights
+
+* 🌙 **Modern UI/UX**
+  Responsive design with smooth animations and clean layout
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer     | Technology                        |
-|-----------|-----------------------------------|
-| Frontend  | React 18, Vite, TailwindCSS       |
-| Routing   | React Router v6                   |
-| State     | Zustand                           |
-| Charts    | Recharts                          |
-| Animation | Framer Motion                     |
-| Backend   | Express.js (Node 18+)             |
-| Database  | MongoDB + Mongoose                |
-| Auth      | JWT + bcryptjs                    |
-| Files     | Multer (CSV/JSON upload)          |
+### Frontend
+
+* **React 18** — UI framework
+* **Vite** — Fast build tool
+* **Tailwind CSS** — Utility-first styling
+* **Zustand** — State management
+* **React Query** — Data fetching & caching
+* **Recharts** — Data visualization
+* **Framer Motion** — Animations
+* **Axios** — API communication
+
+### Backend
+
+* **Node.js** — Runtime environment
+* **Express.js** — Web framework
+* **MongoDB Atlas** — Cloud database
+* **Mongoose** — ODM for MongoDB
+* **JWT** — Authentication
+* **Multer** — File uploads
+* **bcryptjs** — Password hashing
+
+### Deployment
+
+* **Vercel** — Frontend hosting
+* **Render** — Backend hosting
+* **MongoDB Atlas** — Database
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Getting Started (Local Development)
 
 ### Prerequisites
-- Node.js 18+
-- MongoDB running locally or a MongoDB Atlas URI
 
-### 1. Clone & Install
+* Node.js (v20 or higher)
+* MongoDB (local instance or Atlas)
+* Git
+
+---
+
+### 1. Clone the Repository
 
 ```bash
-# Install all dependencies
-npm run install:all
-
-# Or manually:
-cd backend && npm install
-cd ../frontend && npm install
+git clone https://github.com/sauravsingh019/DATAPULSE.git
+cd DATAPULSE
 ```
 
-### 2. Configure Environment
+---
+
+### 2. Setup Backend
 
 ```bash
-cp backend/.env.example backend/.env
-# Edit backend/.env with your MongoDB URI and JWT secret
+cd backend
+npm install
 ```
 
-### 3. Start Development Servers
+Create a `.env` file inside `/backend`:
+
+```env
+PORT=5001
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRES_IN=7d
+CLIENT_URL=http://localhost:5173
+```
+
+Start the backend:
 
 ```bash
-# Start both backend and frontend (from root)
 npm run dev
 ```
 
-Or separately:
+---
+
+### 3. Setup Frontend
+
 ```bash
-npm run dev:backend   # http://localhost:5001
-npm run dev:frontend  # http://localhost:5173
+cd frontend
+npm install
+npm run dev
 ```
 
-### 4. Open the App
+Frontend will run at:
+👉 http://localhost:5173
 
-Visit **http://localhost:5173** → Register an account → Start exploring!
+---
+
+## 🌍 Deployment
+
+### Frontend (Vercel)
+
+* Root Directory: `frontend`
+* Build Command: `npm run build`
+
+Environment Variable:
+
+```
+VITE_API_URL=https://datapulse-backend-72jz.onrender.com/api
+```
+
+---
+
+### Backend (Render)
+
+* Root Directory: `backend`
+* Build Command: `npm install`
+* Start Command: `npm start`
+
+Environment Variables:
+
+```
+PORT=10000
+MONGO_URI=your_mongodb_atlas_uri
+JWT_SECRET=your_jwt_secret
+CLIENT_URL=https://datapulse-delta.vercel.app
+```
 
 ---
 
@@ -100,80 +155,34 @@ Visit **http://localhost:5173** → Register an account → Start exploring!
 ```
 DataPulse/
 ├── backend/
-│   ├── models/
-│   │   ├── User.js         # Auth & user profiles
-│   │   ├── Survey.js       # Survey schema with questions
-│   │   ├── Response.js     # Survey responses
-│   │   ├── Dataset.js      # Uploaded CSV/JSON datasets
-│   │   └── Dashboard.js    # Dashboard with widgets
-│   ├── routes/
-│   │   ├── auth.js         # Register, login, /me
-│   │   ├── surveys.js      # CRUD + analytics
-│   │   ├── responses.js    # Submit + export CSV
-│   │   ├── uploads.js      # CSV upload & analysis
-│   │   └── dashboards.js   # Dashboard CRUD
 │   ├── middleware/
-│   │   └── auth.js         # JWT protect middleware
-│   └── server.js
-│
-└── frontend/
-    └── src/
-        ├── pages/
-        │   ├── LoginPage.jsx
-        │   ├── RegisterPage.jsx
-        │   ├── DashboardHome.jsx      # Overview
-        │   ├── SurveysPage.jsx        # Survey list
-        │   ├── SurveyBuilderPage.jsx  # Form builder
-        │   ├── SurveyAnalyticsPage.jsx
-        │   ├── SurveyKioskPage.jsx    # Tablet kiosk
-        │   ├── DatasetsPage.jsx       # Upload CSV
-        │   ├── DatasetDetailPage.jsx  # Data explorer
-        │   ├── DashboardsPage.jsx
-        │   ├── DashboardBuilderPage.jsx # PowerBI-style
-        │   └── PublicSurveyPage.jsx   # Shareable surveys
-        ├── components/
-        │   └── Layout.jsx             # Sidebar + nav
-        ├── stores/
-        │   └── authStore.js           # Zustand auth state
-        └── utils/
-            └── api.js                 # Axios instance
+│   ├── models/
+│   ├── routes/
+│   ├── server.js
+│   └── package.json
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── stores/
+│   │   └── utils/
+│   ├── index.html
+│   └── package.json
+├── .gitignore
+└── README.md
 ```
 
 ---
 
-## 🔗 API Reference
+## 👨‍💻 Author
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/auth/register` | Register user |
-| POST | `/api/auth/login` | Login |
-| GET | `/api/auth/me` | Current user |
-| GET | `/api/surveys` | List my surveys |
-| POST | `/api/surveys` | Create survey |
-| PUT | `/api/surveys/:id` | Update survey |
-| DELETE | `/api/surveys/:id` | Delete survey |
-| GET | `/api/surveys/:id/analytics` | Survey analytics |
-| GET | `/api/surveys/public/:token` | Public survey |
-| POST | `/api/responses/submit` | Submit response |
-| GET | `/api/responses/survey/:id/export` | Export CSV |
-| POST | `/api/upload/csv` | Upload CSV file |
-| GET | `/api/upload` | List datasets |
-| GET | `/api/upload/:id` | Dataset detail |
-| GET/POST | `/api/dashboards` | List / Create |
-| GET/PUT/DELETE | `/api/dashboards/:id` | Dashboard CRUD |
-
----
-
-## 🎨 Design System
-
-DataPulse uses an Apple-inspired design language:
-- **Colors**: Apple Blue `#0071e3`, Green `#34c759`, semantic tones
-- **Typography**: SF Pro Display / system fonts
-- **Components**: `.card`, `.btn-primary`, `.btn-secondary`, `.input`, `.badge-*`
-- **Animations**: Framer Motion with 250ms ease-out transitions
+**Saurav Singh**
+GitHub: https://github.com/sauravsingh019
 
 ---
 
 ## 📄 License
 
-MIT — built for the DataPulse analytics platform.
+This project is open-source and available under the MIT License.
+
+---
