@@ -2,9 +2,6 @@
 
 > A powerful full-stack data analytics and survey platform designed for modern teams.
 
-<h2>🎥 Demo Video</h2>
-https://github.com/user-attachments/assets/8facc921-791f-4eac-ba24-f35ce25591c5
-
 🌐 **Live App**: https://datapulse-delta.vercel.app
 
 ---
